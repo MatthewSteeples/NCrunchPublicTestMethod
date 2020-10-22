@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net472;netstandard2.0</TargetFrameworks>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <LangVersion>8.0</LangVersion>
+    <Authors>Ledgerscope</Authors>
+    <Company>Ledgerscope</Company>
+    <Copyright>Copyright © Ledgerscope $([System.DateTime]::UtcNow.Year)</Copyright>
+  </PropertyGroup>
+
+  <Choose>
+    <When Condition="'$(Configuration)' == 'Debug' AND ('$(TargetFramework)' == 'net452' OR '$(TargetFramework)' == 'net472') ">
+      <ItemGroup>
+        <Compile Update="**\?*.tests*.cs">
+          <DependentUpon>$([System.Text.RegularExpressions.Regex]::Match(%(Filename), `^[^\.]*`)).cs</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <!-- Microsoft.NET.Test.Sdk added to get a test-tube project icon when in Debug mode, to signify it is a with-integrated-tests project. -->
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
+        <PackageReference Include="MSTest.TestAdapter" Version="2.1.2" />
+        <PackageReference Include="MSTest.TestFramework" Version="2.1.2" />
+        <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.0">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Moq" version="4.7.99" />
+        <PackageReference Include="NCrunch.Framework" Version="4.5.0" />
+      </ItemGroup>
+      <PropertyGroup>
+        <AnalysisLevel>latest</AnalysisLevel>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <Compile Remove="**\?*.tests*.cs" />
+        <Compile Remove="TestHelpers\**\*.cs" />
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
+
+  <PropertyGroup>
+    <AnalysisLevel>latest</AnalysisLevel>
+  </PropertyGroup>
+
+</Project>
