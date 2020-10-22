@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace NCrunchPublicTestMethod
 {
+    //TODO: If this isn't static then no tests fail
     [TestClass]
     public static class Init
     {

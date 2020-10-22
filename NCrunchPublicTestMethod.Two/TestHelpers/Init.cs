@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NCrunchPublicTestMethod.Two
 {
-    //TODO: Make class static
+    //TODO: 1 Make class static
     [TestClass]
     public class Init
     {
